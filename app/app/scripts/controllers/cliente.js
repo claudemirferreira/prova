@@ -17,6 +17,8 @@ angular.module('appApp')
 
      // Retorna todos os registros de pessoas do banco de dados
      $scope.load = function() {
+     	//$scope.registros = homeService.query();
+
      	$scope.registros = [
 							    {
 							        "id": 2,
@@ -43,7 +45,6 @@ angular.module('appApp')
 							        "dataCadastro": null
 							    }
 							]
-     	//$scope.registros = PessoasSrv.query();
 	}
 
 
