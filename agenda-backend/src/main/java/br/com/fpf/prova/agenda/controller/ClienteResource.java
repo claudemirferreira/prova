@@ -24,7 +24,7 @@ public class ClienteResource {
     @Autowired
     private ClienteRepository service;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET)
     @ResponseBody
     public List<Cliente> findAll() {
         List<Cliente> list = service.findAll();
@@ -38,13 +38,13 @@ public class ClienteResource {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Cliente create(@RequestBody Cliente cliente) {
         return service.save(cliente);
 
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id:[0-9][0-9]*}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Cliente cliente = service.findOne(id);

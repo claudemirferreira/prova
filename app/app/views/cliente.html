@@ -1,28 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="container">
+    <h1>Prova FPF!</h1>    
 
-  <div ng-init="load()">
-    <h3>Listagem</h3>
-    <a href="#/novo">Novo</a>
-    <table class="table">
+    
+        <form name="regForm" ng-submit="register()">
+                    
+            <!-- Each input is bound to a property on the prototype newMember object -->
+            <div >
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome"  ng-model="newCliente.nome" placeholder="informe o nome" required autofocus/>
+                <span class="error" ng-show="regForm.nome.$error.required">required</span>
+                <span class="error" ng-show="errors.nome">{{errors.nome}}</span>
+            </div>
+            <div>
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome" ng-model="newCliente.sobrenome" ng-pattern="/^[0-9]{10,12}$/" placeholder="informe o sobrenome" required/>
+                <span class="error" ng-show="regForm.sobrenome.$error.required">required</span>
+                <span class="error" ng-show="regForm.sobrenome.$error.pattern">must be between 10 and 12 digits</span>
+                <span class="error" ng-show="errors.sobrenome">{{errors.sobrenome}}</span>
+            </div>
+            <div>
+                <label for="apelido">Apelido</label>
+                <input type="text" name="apelido" id="apelido" ng-model="newCliente.apelido" ng-pattern="/^[0-9]{10,12}$/" placeholder="informe o apelido" required/>
+                <span class="error" ng-show="regForm.apelido.$error.required">required</span>
+                <span class="error" ng-show="regForm.apelido.$error.pattern">must be between 10 and 12 digits</span>
+                <span class="error" ng-show="errors.apelido">{{errors.apelido}}</span>
+            </div>
+            <div>
+                <label for="telefone">Telefone #:</label>
+                <input type="tel" name="telefone" id="telefone" ng-model="newCliente.telefone" ng-pattern="/^[0-9]{10,12}$/" placeholder="informe o telefone" required/>
+                <span class="error" ng-show="regForm.telefone.$error.required">required</span>
+                <span class="error" ng-show="regForm.telefone.$error.pattern">must be between 10 and 12 digits</span>
+                <span class="error" ng-show="errors.telefone">{{errors.phoneNumber}}</span>
+            </div>
+            
+            <!-- We output a list of success messages (appropriately styled!) for the form. -->
+            <ul ng-hide="!successMessages" class="success">
+                <li ng-repeat="message in successMessages">{{message}}</li>
+            </ul>
+
+            <!-- Output the list of error messages if any. -->
+            <ul ng-hide="!errorMessages" class="error">
+                <li ng-repeat="message in errorMessages">{{message}}</li>
+            </ul>
+
+            <!-- There are two buttons, the default submit action (which is bound for the whole form), and a reset button, that clears the form. -->
+            <div>
+                <input type="submit" ng-disabled="regForm.$invalid" id="register" value="Register" />
+                <input type="button" ng-click="reset()" name="cancel"
+                    id="cancel" value="Cancel" />
+            </div>
+    </form>
+
+    <!-- A list of registered members -->
+    <h2>Members</h2>
+    <!-- If there are no members registered, instead of showing the table, we show a simple message. -->
+    <em ng-show="registros.length == 0">No registered clientes.</em>
+    <table ng-hide="registros.length == 0" class="simpletablestyle">
         <thead>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Sobrenome</th>
-            <th>Apelido</th>
-            <th>Telefone</th>
-            <th>Ação</th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="registro in registros">
-                <td>{{registro.id}}</td>
-                <td>{{registro.nome}}</td>
-                <td>{{registro.sobrenome}}</td>
-                <td>{{registro.apelido}}</td>
-                <td>{{registro.telefone}}</td>
-                <td>
-                    <a href="#/editar/{{registro.id}}" class="btn btn-primary btn-xs">Editar</a>
-                    <a href="#/" ng-click="delete(registro.id)" class="btn btn-danger btn-xs">Excluir</a>
-                </td>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Apelido</th>
+                <th>Telefone</th>
+                <th>Ação</th>
             </tr>
-        </tbody>
+        </thead>
+        <!-- The table is built using the AngularJS repeat function, iterating over the members variable, and ordering by the property specified in the orderBy variable -->
+        <tr ng-repeat="registro in registros | orderBy:orderBy">
+            <td>{{registro.id}}</td>
+            <td>{{registro.nome}}</td>
+            <td>{{registro.sobrenome}}</td>
+            <td>{{registro.apelido}}</td>
+            <td>{{registro.telefone}}</td>
+            <td>
+                <a href="#/" ng-click="delete(registro.id)" class="btn btn-danger btn-xs">Excluir</a>
+            </td>
     </table>
-  </div>
+    <div>
+        <!-- The table has a button to manually refresh the values, in case, for example, someone else adds a member -->
+        <input type="button" ng-click="refresh()" name="refresh" id="refresh" value="Refresh" />
+    </div>
+</div>
