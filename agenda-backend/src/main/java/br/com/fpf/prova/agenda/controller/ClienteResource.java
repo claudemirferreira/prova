@@ -44,7 +44,7 @@ public class ClienteResource {
 
     }
 
-    @RequestMapping(value = "/{id:[0-9][0-9]*}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id:[0-9][0-9]*}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Cliente cliente = service.findOne(id);

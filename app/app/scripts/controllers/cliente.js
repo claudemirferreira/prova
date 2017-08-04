@@ -36,16 +36,10 @@ function ClientesCtrl($scope, $http, Clientes) {
         $scope.clearMessages();
 
         Clientes.save($scope.newCliente, function(data) {
-            //$scope.delete(3);
-
             // Update the list of members
             $scope.refresh();
-
             // Clear the form
             $scope.reset();
-
-
-
             // mark success on the registration form
             $scope.successMessages = [ 'Cliente Registered' ];
         }, function(result) {
@@ -62,14 +56,8 @@ function ClientesCtrl($scope, $http, Clientes) {
     // and displays any error messages
     $scope.delete = function(registro) {
         alert(registro.id);
-        var data = {id:id};
 
-        Clientes.delete( registro.id, function(data) {
-            console.log('Deleted from server');
-          });registro
-
-
-        Clientes.excluir(id, function() {
+        Clientes.excluir( {id:registro.id} , function(data) {
             //$scope.delete(5);
 
             // Update the list of members

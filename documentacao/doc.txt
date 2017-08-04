@@ -4,7 +4,7 @@ O projeto foi dividido em 2 projetos :
 	- Java;
 	- Spring Data;
 	- JPA;
-	- Postgresql
+	- Postgresql (schema = fpf, usuario = postgres, senha = root)
 	
 2 - Frontend
 	- NPM;
