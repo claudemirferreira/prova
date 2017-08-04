@@ -1,4 +1,5 @@
 function ClientesCtrl($scope, $http, Clientes) {
+    $scope.registro = {};
 
     // Define a refresh function, that updates the data from the REST service
     $scope.refresh = function() {
@@ -59,12 +60,16 @@ function ClientesCtrl($scope, $http, Clientes) {
 
     // Define a register function, which adds the member using the REST service,
     // and displays any error messages
-    $scope.delete = function(id) {
-        alert(id);
+    $scope.delete = function(registro) {
+        alert(registro.id);
         var data = {id:id};
-        User.delete_user({},data);
 
-        Clientes.remove({}, function(data) {
+        Clientes.delete( registro.id, function(data) {
+            console.log('Deleted from server');
+          });registro
+
+
+        Clientes.excluir(id, function() {
             //$scope.delete(5);
 
             // Update the list of members

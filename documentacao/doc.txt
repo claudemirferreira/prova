@@ -1,0 +1,16 @@
+O projeto foi dividido em 2 projetos :
+
+1 Backend
+	- Java;
+	- Spring Data;
+	- JPA;
+	- Postgresql
+	
+2 - Frontend
+	- NPM;
+	- Grunt;
+	- Bower
+	- Karma;
+	- Angular 1;
+	- Bootstrap;
+	
