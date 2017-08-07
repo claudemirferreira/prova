@@ -24,24 +24,32 @@ public class ClienteResource {
     @Autowired
     private ClienteRepository service;
 
-    @RequestMapping( method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Cliente> findAll() {
         List<Cliente> list = service.findAll();
         return list;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> find(@PathVariable Long id) {
+    @RequestMapping(value = "/pesquisar", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Cliente> pesquisar(@RequestBody Cliente cliente) {
+        List<Cliente> lista = service.findByNomeContainingIgnoreCase(cliente.getNome());
+        return lista;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Cliente find(@PathVariable Long id) {
+        System.out.println(id);
         Cliente cliente = service.findOne(id);
-        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+        return cliente;
     }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Cliente create(@RequestBody Cliente cliente) {
         return service.save(cliente);
-
     }
 
     @RequestMapping(value = "/{id:[0-9][0-9]*}", method = RequestMethod.DELETE)
@@ -54,6 +62,7 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseBody
     public Cliente update(@RequestBody Cliente cliente) {
         return service.save(cliente);
     }

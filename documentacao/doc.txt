@@ -14,3 +14,14 @@ O projeto foi dividido em 2 projetos :
 	- Angular 1;
 	- Bootstrap;
 	
+	
+Instrução para rodar o projeto.
+1 crie o banco fpf no postgres.
+2 crie o usuario postgres com a senha root
+3 coloqueo arquivo prova-backend-0.0.1-SNAPSHOT.jar no servidor de aplicacao e start o servidor,
+4 no diretorio webapp execute os comandos
+	- npm install;
+	- npm bower
+	- grunt serve
+5 abrar o navegador e digite http://localhost:8080/clientes
+	

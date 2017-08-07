@@ -2,14 +2,62 @@ function ClientesCtrl($scope, $http, $location, $resource, Clientes) {
 	
   var resource = $resource('http://localhost:8080/clientes/:id');
 
+
 	// Define a refresh function, that updates the data from the REST service
 	$scope.refresh = function() {
 		$scope.registros = Clientes.query();
 	};
 	
-	$scope.get = function(resgistro) {
-		$scope.registro = resgistro;
+	$scope.get = function(registro) {
+		$scope.registro = registro;
 	};
+
+	$scope.detalhe = function(registro) {
+		//$scope.registro = registro;
+		$location.path('http://localhost:9000/!#/about');
+	};
+
+	/*
+
+	$scope.detalhe = function(registro) {
+		$scope.registro = resource.get({id:registro.id});
+
+		resource.get({id:id}, function(data) {
+			$scope.successMessages = [ 'Cliente excluído' ];
+			$scope.refresh();
+			$scope.reset();
+		}, function(result) {
+			if ((result.status == 409) || (result.status == 400)) {
+				$scope.errors = result.data;
+			} else {
+				$scope.errorMessages = [ 'Unknown  server error' ];
+			}
+			$scope.$apply();
+		});
+
+		alert($scope.registro.nome);
+		$location.path('/detalhe');
+	};
+
+	
+	$scope.detalhe = function(registro) {
+		$scope.registro = resource.get({id:registro.id});
+
+		resource.get({id:id}, function(data) {
+			$scope.registro = data;
+			alert($scope.registro.nome);
+		}, function(result) {
+			if ((result.status == 409) || (result.status == 400)) {
+				$scope.errors = result.data;
+			} else {
+				$scope.errorMessages = [ 'Unknown  server error' ];
+			}
+			$scope.$apply();
+		});
+		$scope.$apply();
+		$location.path('/detalhe');
+	};
+	*/
 
 	// Define a reset function, that clears the prototype newTanque object, and
 	// consequently, the form
