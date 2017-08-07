@@ -24,11 +24,18 @@
             </div>
             <div>
                 <label for="telefone">Telefone</label>
-                <input type="tel" name="telefone" id="telefone" ng-model="registro.telefone" ng-pattern="/^[0-9]{10,12}$/" placeholder="informe o telefone" required/>
+                <input type="text" name="telefone" id="telefone" ng-model="registro.telefone" ng-pattern="/^[0-9]{10,12}$/" placeholder="informe o telefone" required/>
                 <span class="error" ng-show="regForm.telefone.$error.required">required</span>
                 <span class="error" ng-show="regForm.telefone.$error.pattern">must be between 10 and 12 digits</span>
-                <span class="error" ng-show="errors.telefone">{{errors.phoneNumber}}</span>
-            </div>
+                <span class="error" ng-show="errors.telefone">{{errors.telefone}}</span>
+			</div>
+
+            <div>
+                <label for="dataCadastro">Data de Cadastro</label>
+                <input type="date" name="dataCadastro" id="dataCadastro" ng-model="registro.dataCadastro" placeholder="informe o dataCadastro" required/>
+                <span class="error" ng-show="regForm.dataCadastro.$error.required">required</span>
+                <span class="error" ng-show="errors.dataCadastro">{{errors.dataCadastro}}</span>
+			</div>
 
 			<!-- We output a list of success messages (appropriately styled!) for the form. -->
 			<ul ng-hide="!successMessages" class="success">
@@ -48,7 +55,7 @@
 
 				<button type="button" ng-click="reset()" name="cancel" id="cancel"
 					value="Cancel" class="btn btn-xs btn-info">
-					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Cancelar
+					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Cancelarwwww
 				</button>
 			</div>
 		</fieldset>
@@ -65,6 +72,8 @@
 				<th>Nome</th>
 				<th>Sobrenome</th>
 				<th>Apelido</th>
+				<th>Telefone</th>
+				<th>Data</th>
 				<th>Acao</th>
 			</tr>
 		</thead>
@@ -73,6 +82,8 @@
 			<td>{{registro.nome}}</td>
 			<td>{{registro.sobrenome}}</td>
 			<td>{{registro.apelido}}</td>
+			<td>{{registro.telefone}}</td>
+			<td>{{registro.dataCadastro | date : "dd/MM/yyyy"}}</td>
 			<td><button ng-click="remove(registro.id)"
 					class="btn btn-xs btn-danger">
 					<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Excluir
@@ -84,5 +95,4 @@
 	<div>
 		Total de registors: {{registros.length}}
 	</div>
-
 </div>

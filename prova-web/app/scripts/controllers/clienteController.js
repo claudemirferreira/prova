@@ -8,7 +8,6 @@ function ClientesCtrl($scope, $http, $location, $resource, Clientes) {
 	};
 	
 	$scope.get = function(resgistro) {
-		alert("yyyyy" + resgistro);
 		$scope.registro = resgistro;
 	};
 
