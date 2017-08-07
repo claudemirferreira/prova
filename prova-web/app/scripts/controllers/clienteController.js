@@ -93,8 +93,6 @@ function ClientesCtrl($scope, $http, $location, $resource, Clientes) {
 		$scope.errors = {};
 
 		Clientes.save($scope.registro, function(data) {
-
-			// mark success on the registration form
 			$scope.successMessages = [ 'Cliente Registered' ];
 
 			$scope.refresh();
@@ -110,6 +108,13 @@ function ClientesCtrl($scope, $http, $location, $resource, Clientes) {
 			$scope.$apply();
 		});
 
+	};
+
+	$scope.main = function(registro) {
+		$scope.registro = registro;
+		alert(registro.nome);
+		$location.path('/main');
+		$scope.registro = registro;
 	};
 
 	// Call the refresh() function, to populate the list of tanquesf

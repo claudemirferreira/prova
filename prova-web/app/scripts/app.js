@@ -31,6 +31,9 @@ angular.module(
 				controller: ClientesCtrl
 				//controller : LoginCtrl
 				// Add a default route
+			}).when('/main', {
+				templateUrl: 'views/main.html',
+				controller: ClientesCtrl
 			}).otherwise({
 				redirectTo: '/cliente'
 			});

@@ -10,19 +10,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class ProvaApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProvaApplication.class, args);
-	}
-	
-	@Bean
-	   public WebMvcConfigurer corsConfigurer() {
-	       return new WebMvcConfigurerAdapter() {
-	           @Override
-	           public void addCorsMappings(CorsRegistry registry) {
-	               registry.addMapping("/**")
-	                       .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
-	                       .allowedOrigins("*");
-	           }
-	       };
-	   }
+    public static void main(String[] args) {
+        SpringApplication.run(ProvaApplication.class, args);
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT").allowedOrigins("*");
+            }
+        };
+    }
 }
