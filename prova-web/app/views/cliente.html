@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+	<!-- Standard HTML form, with the submit function bound to the register() function defined in the the controller -->
+	<form id="reg" ng-submit="register()">
+		<fieldset>
+			<legend>Cadastrar Cliente:</legend>
+			 <div >
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome"  ng-model="registro.nome" placeholder="informe o nome" required autofocus/>
+                <span class="error" ng-show="regForm.nome.$error.required">required</span>
+                <span class="error" ng-show="errors.nome">{{errors.nome}}</span>
+            </div>
+            <div>
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome" ng-model="registro.sobrenome" placeholder="informe o sobrenome" required/>
+                <span class="error" ng-show="regForm.sobrenome.$error.required">required</span>
+                <span class="error" ng-show="errors.sobrenome">{{errors.sobrenome}}</span>
+            </div>
+            <div>
+                <label for="apelido">Apelido</label>
+                <input type="text" name="apelido" id="apelido" ng-model="registro.apelido" placeholder="informe o apelido" required/>
+                <span class="error" ng-show="regForm.apelido.$error.required">required</span>
+                <span class="error" ng-show="errors.apelido">{{errors.apelido}}</span>
+            </div>
+            <div>
+                <label for="telefone">Telefone</label>
+                <input type="tel" name="telefone" id="telefone" ng-model="registro.telefone" ng-pattern="/^[0-9]{10,12}$/" placeholder="informe o telefone" required/>
+                <span class="error" ng-show="regForm.telefone.$error.required">required</span>
+                <span class="error" ng-show="regForm.telefone.$error.pattern">must be between 10 and 12 digits</span>
+                <span class="error" ng-show="errors.telefone">{{errors.phoneNumber}}</span>
+            </div>
+
+			<!-- We output a list of success messages (appropriately styled!) for the form. -->
+			<ul ng-hide="!successMessages" class="success">
+				<li ng-repeat="message in successMessages">{{message}}</li>
+			</ul>
+
+			<!-- Output the list of error messages if any. -->
+			<ul ng-hide="!errorMessages" class="error">
+				<li ng-repeat="message in errorMessages">{{message}}</li>
+			</ul>
+
+			<!-- There are two buttons, the default submit action (which is bound for the whole form), and a reset button, that clears the form. -->
+			<div>
+				<button type="submit" class="btn btn-xs btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Salvar
+				</button>
+
+				<button type="button" ng-click="reset()" name="cancel" id="cancel"
+					value="Cancel" class="btn btn-xs btn-info">
+					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Cancelar
+				</button>
+			</div>
+		</fieldset>
+	</form>
+
+	<!-- A list of registered tanques -->
+	<h2>Listagem de Tanque</h2>
+	<!-- If there are no tanques registered, instead of showing the table, we show a simple message. -->
+	<em ng-show="registros.length == 0">No registered registros.</em>
+	<table ng-hide="registros.length == 0" class="simpletablestyle">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Sobrenome</th>
+				<th>Apelido</th>
+				<th>Acao</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="registro in registros | orderBy:orderBy">
+			<td>{{registro.id}}</td>
+			<td>{{registro.nome}}</td>
+			<td>{{registro.sobrenome}}</td>
+			<td>{{registro.apelido}}</td>
+			<td><button ng-click="remove(registro.id)"
+					class="btn btn-xs btn-danger">
+					<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>Excluir
+				</button>
+				<button ng-click="get(registro)" class="btn btn-xs btn-success">
+					<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>Editar
+				</button></td>
+	</table>
+	<div>
+		Total de registors: {{registros.length}}
+	</div>
+
+</div>
